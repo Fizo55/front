@@ -35,10 +35,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RegiserForm() {
+export default function RegisterForm() {
     const [open, setOpen] = React.useState(false);
-
-    const [firstName, email, password] = React.useState('')
+    const [email, setEmail] = React.useState('')
+    const [firstName, setFirstName] = React.useState('')
+    const [password, setPassword] = React.useState('')
+    const [lastName, setLastName] = React.useState('')
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -55,8 +57,8 @@ export default function RegiserForm() {
 
     loadCSS("https://use.fontawesome.com/releases/v5.1.0/css/all.css", document.querySelector("#insertion-point-jss"));
 
-    async function ExecRegister() {
-        await Register(firstName, email, password)
+    function ExecRegister() {
+        Register(firstName, email, password, lastName)
     }
 
     return (
@@ -77,19 +79,19 @@ export default function RegiserForm() {
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6}>
                                         <TextField
-                                            onChange={event => firstName(event.target.value)}
-                                            autoComplete="fname"
-                                            name="firstName"
+                                            onChange={event => setFirstName(event.target.value)}
                                             variant="outlined"
                                             required
                                             fullWidth
                                             id="firstName"
                                             label="First Name"
-                                            autoFocus
+                                            name="firstName"
+                                            autoComplete="fname"
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <TextField
+                                            onChange={event => setLastName(event.target.value)}
                                             variant="outlined"
                                             required
                                             fullWidth
@@ -101,7 +103,7 @@ export default function RegiserForm() {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField
-                                            onChange={event => email(event.target.value)}
+                                            onChange={event => setEmail(event.target.value)}
                                             variant="outlined"
                                             required
                                             fullWidth
@@ -113,7 +115,7 @@ export default function RegiserForm() {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField
-                                            onChange={event => password(event.target.value)}
+                                            onChange={event => setPassword(event.target.value)}
                                             variant="outlined"
                                             required
                                             fullWidth
@@ -126,12 +128,11 @@ export default function RegiserForm() {
                                     </Grid>
                                 </Grid>
                                 <Button
-                                    type="submit"
                                     fullWidth
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
-                                    onClick={async () => {await ExecRegister} }
+                                    onClick={ ExecRegister }
                                 >
                                     Sign Up
                                 </Button>

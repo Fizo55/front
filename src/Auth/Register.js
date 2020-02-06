@@ -1,13 +1,22 @@
 import axios from 'axios'
+import qs from 'querystring'
 
-async function Register(username, email, password) {
-    const response = await axios.post(
-        process.env.REACT_URL_API,
-        { username: username, email: email, password: password },
-        { headers: { 'Content-Type': 'application/json' } }
-    )
+function Register(username, email, password, lname) {
+    const requestBody = {
+        email: email,
+        username: username,
+        password: password,
+        lname: lname
+    }
 
-    // TODO : Add popup (200 = Success / Others = Error)
+    const config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+
+    const response = axios.post(process.env.REACT_APP_URL_API+'/register/', qs.stringify(requestBody), config)
+    return response // return the promise
 }
 
 export default Register
