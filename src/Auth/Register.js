@@ -1,12 +1,13 @@
 import axios from 'axios'
 import qs from 'querystring'
 
-function Register(username, email, password, lname) {
+function Register(username, email, password, lname, captchaToken) {
     const requestBody = {
         email: email,
         username: username,
         password: password,
-        lname: lname
+        lname: lname,
+        captchaToken: captchaToken
     }
 
     const config = {

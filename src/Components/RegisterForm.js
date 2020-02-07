@@ -10,6 +10,8 @@ import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import "font-awesome/css/font-awesome.css";
+import loadjs from 'loadjs'
+import Recaptcha from 'react-recaptcha'
 import Register from '../Auth/Register';
 import { loadCSS } from "fg-loadcss/src/loadCSS";
 import classNames from "classnames";
@@ -41,6 +43,7 @@ export default function RegisterForm() {
     const [firstName, setFirstName] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [lastName, setLastName] = React.useState('')
+    const [captchaToken, setCaptchaToken] = React.useState('')
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -50,15 +53,20 @@ export default function RegisterForm() {
         setOpen(false);
     };
 
+    const verifyCallback = function (response) {
+        setCaptchaToken(response)
+    };
+
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const classes = useStyles();
 
     loadCSS("https://use.fontawesome.com/releases/v5.1.0/css/all.css", document.querySelector("#insertion-point-jss"));
+    loadjs('https://www.google.com/recaptcha/api.js?render=explicit')
 
     function ExecRegister() {
-        Register(firstName, email, password, lastName)
+        Register(firstName, email, password, lastName, captchaToken)
     }
 
     return (
@@ -127,6 +135,10 @@ export default function RegisterForm() {
                                         />
                                     </Grid>
                                 </Grid>
+                                <Recaptcha
+                                    sitekey={process.env.REACT_APP_SITE_KEY}
+                                    render="explicit"
+                                    verifyCallback={verifyCallback} />
                                 <Button
                                     fullWidth
                                     variant="contained"
