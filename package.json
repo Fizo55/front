@@ -12,10 +12,13 @@
     "env-cmd": "^10.0.1",
     "fg-loadcss": "^2.1.0",
     "font-awesome": "^4.7.0",
+    "i18next": "^19.1.0",
+    "i18next-browser-languagedetector": "^4.0.1",
     "loadjs": "^4.2.0",
     "querystring": "^0.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-i18next": "^9.0.10",
     "react-recaptcha": "^2.3.10",
     "react-scripts": "3.3.1"
   },

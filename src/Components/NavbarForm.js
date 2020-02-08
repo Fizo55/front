@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import RegisterForm from './RegisterForm'
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ButtonAppBar() {
+function ButtonAppBar({ t }) {
     const classes = useStyles();
 
     return (
@@ -29,9 +30,11 @@ export default function ButtonAppBar() {
                         { process.env.REACT_APP_NAME }
                     </Typography>
                     <RegisterForm />
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">{t('LOGIN')}</Button>
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
+
+export default withNamespaces()(ButtonAppBar)

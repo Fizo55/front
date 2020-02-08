@@ -1,0 +1,9 @@
+{
+  "LOGIN": "LOGIN",
+  "REGISTER": "Register",
+  "FNAME": "First Name",
+  "LNAME": "Last Name",
+  "EMAIL": "Email Address",
+  "PASSWORD": "Password",
+  "ALREADY_HAVE_ACCOUNT": "Already have an account? Sign in"
+}

@@ -17,6 +17,7 @@ import { loadCSS } from "fg-loadcss/src/loadCSS";
 import classNames from "classnames";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RegisterForm() {
+function RegisterForm({ t }) {
     const [open, setOpen] = React.useState(false);
     const [email, setEmail] = React.useState('')
     const [firstName, setFirstName] = React.useState('')
@@ -72,7 +73,7 @@ export default function RegisterForm() {
     return (
         <div>
             <Button color="inherit" onClick={handleClickOpen}>
-                REGISTER
+                {t('REGISTER')}
             </Button>
             <Dialog open={open} onClose={handleClose} fullScreen={fullScreen} aria-labelledby="form-dialog-title">
                 <DialogContent>
@@ -80,7 +81,7 @@ export default function RegisterForm() {
                         <CssBaseline />
                         <div className={classes.paper}>
                             <Typography component="h1" variant="h5">
-                                Sign up
+                                {t('REGISTER')}
                             </Typography>
                             <Icon className={classNames(classes.avatar, "fas fa-user")} />
                             <form className={classes.form} noValidate>
@@ -92,7 +93,7 @@ export default function RegisterForm() {
                                             required
                                             fullWidth
                                             id="firstName"
-                                            label="First Name"
+                                            label={t('FNAME')}
                                             name="firstName"
                                             autoComplete="fname"
                                         />
@@ -105,7 +106,7 @@ export default function RegisterForm() {
                                             fullWidth
                                             id="lastName"
                                             label="Last Name"
-                                            name="lastName"
+                                            name={t('LNAME')}
                                             autoComplete="lname"
                                         />
                                     </Grid>
@@ -116,7 +117,7 @@ export default function RegisterForm() {
                                             required
                                             fullWidth
                                             id="email"
-                                            label="Email Address"
+                                            label={t('EMAIL')}
                                             name="email"
                                             autoComplete="email"
                                         />
@@ -128,7 +129,7 @@ export default function RegisterForm() {
                                             required
                                             fullWidth
                                             name="password"
-                                            label="Password"
+                                            label={t('PASSWORD')}
                                             type="password"
                                             id="password"
                                             autoComplete="current-password"
@@ -146,12 +147,12 @@ export default function RegisterForm() {
                                     className={classes.submit}
                                     onClick={ ExecRegister }
                                 >
-                                    Sign Up
+                                    {t('REGISTER')}
                                 </Button>
                                 <Grid container justify="flex-end">
                                     <Grid item>
                                         <Link href="#" variant="body2">
-                                            Already have an account? Sign in
+                                            {t('ALREADY_HAVE_ACCOUNT')}
                                         </Link>
                                     </Grid>
                                 </Grid>
@@ -163,3 +164,5 @@ export default function RegisterForm() {
         </div>
     );
 }
+
+export default withNamespaces()(RegisterForm)
